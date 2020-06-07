@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+    paymentdemoapi: 
+        build: ../PaymentDemo
+        environment:
+            - "ASPNETCORE_ENVIRONMENT=Development"
+            - "ASPNETCORE_CONNECTIONSTRING_PAYMENTDEMO_DB=Server=paymentdemodb;Database=bmp.hra;User Id=sa;Password=SuperSafePlainText-D9821jhsvGD"
+        image: vmandeal/paymentdemo:v1.0
+        container_name: paymentdemo.api
+        ports:
+            - "5000:80"
+        depends_on:
+            - paymentdemodb
+        
+    paymentdemodb:
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        container_name: paymentdemo.db
+        ports:
+            - "1434:1433"
+        environment:
+            - "SA_PASSWORD=SuperSafePlainText-D9821jhsvGD"
+            - "ACCEPT_EULA=Y"
+    
+   
