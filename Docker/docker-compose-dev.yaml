@@ -4,6 +4,9 @@ services:
         environment:
             - "ASPNETCORE_ENVIRONMENT=Development"
             - "ASPNETCORE_CONNECTIONSTRING_PAYMENTDEMO_DB=Server=paymentdemodb;Database=bmp.hra;User Id=sa;Password=SuperSafePlainText-D9821jhsvGD"
+            - "ASPNETCORE_CHEAP_PROVIDER_ENDPOINT=http://cheapproviderapi:81/api"       
+            - "ASPNETCORE_EXPENSIVE_PROVIDER_ENDPOINT=http://expensiveproviderapi:82/api"       
+            - "ASPNETCORE_PREMIUM_PROVIDER_ENDPOINT=http://premiumproviderapi:83/api"  
         image: vmandeal/paymentdemo:v1.0
         container_name: paymentdemo.api
         ports:
@@ -20,4 +23,26 @@ services:
             - "SA_PASSWORD=SuperSafePlainText-D9821jhsvGD"
             - "ACCEPT_EULA=Y"
             
- 
+    cheapproviderapi: 
+        environment:
+            - "ASPNETCORE_ENVIRONMENT=Development"     
+        image: vmandeal/cheapprovider:v1.0
+        container_name: cheapprovider.api
+        ports:
+            - "5001:81"
+            
+    expensiveproviderapi: 
+        environment:
+            - "ASPNETCORE_ENVIRONMENT=Development"     
+        image: vmandeal/expensiveprovider:v1.0
+        container_name: expensiveprovider.api
+        ports:
+            - "5002:82"
+            
+    premiumproviderapi: 
+        environment:
+            - "ASPNETCORE_ENVIRONMENT=Development"     
+        image: vmandeal/premiumprovider:v1.0
+        container_name: premiumprovider.api
+        ports:
+            - "5003:83"
