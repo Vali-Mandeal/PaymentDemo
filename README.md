@@ -3,14 +3,21 @@
 
 How To:
 
-- Run this project in Docker:
-Go to Docker and run "Run.ps1" with PowerShell.
+Run this project in Docker:
+- Go to Docker and run "Run.ps1" with PowerShell.
+- Done!
 
-- Run this project in Visual Studio:
-Clone this Repo. Run it using PaymentDemo profile (instead of IIS Express).
-Packages should restore themselves automatically.
+Run this project in Visual Studio:
+- Packages will restore themselves automatically, wait until it's done.
+- Right click on the Solution and click "Set Startup Projects"
+- Click "Multiple startup projects" instead of single
+- Set Action to Start for each project except PaymentDemo.Tests like this: ![alt text](https://media.discordapp.net/attachments/719525028730765371/719641510815072256/unknown.png)
+- Click Apply and Ok
+- Now you should have the following Setup, click on it to start the project: ![alt text](https://media.discordapp.net/attachments/719525028730765371/719642301042786354/unknown.png)
+- Done!
 
-The only endpoint is located at: http://localhost:5000/api/payments (use a POST verb)
+The only endpoint is located at: http://localhost:5000/api/payments (use a POST verb).
+
 Or even better, try out its basic Swagger documentation: http://localhost:5000/swagger
 
 The app will automatically create and seed its database.
