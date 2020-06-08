@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PaymentDemo.Dtos;
-using PaymentDemo.Entities;
 
 namespace PaymentDemo.Tests.Unit_Tests.Payments
 {

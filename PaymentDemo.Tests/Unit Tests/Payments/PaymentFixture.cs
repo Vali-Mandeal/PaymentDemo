@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
 using AutoMapper;
-using FluentValidation;
 using Moq;
 using PaymentDemo.Controllers;
 using PaymentDemo.Dtos;

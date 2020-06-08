@@ -10,14 +10,17 @@ namespace PaymentDemo.Services.Business
     {
         private readonly ICheapPaymentGateway _cheapPaymentGateway;
         private readonly IExpensivePaymentGateway _expensivePaymentGateway;
+        private readonly IPremiumPaymentGateway _premiumPaymentGateway;
         private readonly IUnitOfWork _unitOfWork;
 
         public PaymentService(ICheapPaymentGateway cheapPaymentGateway, 
             IExpensivePaymentGateway expensivePaymentGateway,
+            IPremiumPaymentGateway premiumPaymentGateway,
             IUnitOfWork unitOfWork)
         {
             _cheapPaymentGateway = cheapPaymentGateway;
             _expensivePaymentGateway = expensivePaymentGateway;
+            _premiumPaymentGateway = premiumPaymentGateway;
             _unitOfWork = unitOfWork;
         }
         public async Task<Result<Payment>> Process(Payment payment)
@@ -26,26 +29,27 @@ namespace PaymentDemo.Services.Business
 
             if (payment.Amount <= 20)
             {
-                processingResult = _cheapPaymentGateway.Process(payment);
+                processingResult = await _cheapPaymentGateway.Process(payment);
                 payment = processingResult.Value;
             }
-            else if(payment.Amount > 20 && payment.Amount < 500)
+            else if(payment.Amount > 20 && payment.Amount <= 500)
             {
-                processingResult = _expensivePaymentGateway.Process(payment);
+                processingResult = await _expensivePaymentGateway.Process(payment);
                 payment = processingResult.Value;
 
                 if (processingResult.IsFailed)
                 {
-                    processingResult = _cheapPaymentGateway.Process(payment);
+                    processingResult = await _cheapPaymentGateway.Process(payment);
                     payment = processingResult.Value;
                 }
             }
             else
             {
-                while (payment.ExpensiveProviderTries < 3)
+                while (payment.PremiumProviderTries < 3)
                 {
-                    processingResult = _expensivePaymentGateway.Process(payment);
+                    processingResult = await _premiumPaymentGateway.Process(payment);
                     if (processingResult.IsSuccessful) break;
+                    payment = processingResult.Value;
                 }
                 payment = processingResult?.Value;
             }

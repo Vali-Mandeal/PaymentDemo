@@ -6,6 +6,7 @@ namespace PaymentDemo.Services.Business.Interfaces
 {
     public interface ICheapPaymentGateway
     {
-        Result<Payment> Process(Payment payment);
+        Task<Result<Payment>> Process(Payment payment);
     }
 }
+    

@@ -10,6 +10,7 @@ namespace PaymentDemo.Entities
         public DateTime ExpirationDate { get; set; }
         public string SecurityCode { get; set; }
         public decimal Amount { get; set; }
+        public int PremiumProviderTries { get; set; }
         public int ExpensiveProviderTries { get; set; }
         public int CheapProviderTries { get; set; }
         public int IdState { get; set; }

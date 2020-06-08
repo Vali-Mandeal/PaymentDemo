@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using PaymentDemo.Helpers;
 using PaymentDemo.Persistance;
 using PaymentDemo.Persistance.Repositories;
 using PaymentDemo.Persistance.Repositories.Interfaces;
@@ -34,7 +35,7 @@ namespace PaymentDemo
                 options.UseSqlServer
                 (
                     //Configuration.GetConnectionString("PaymentsDb"
-                    Environment.GetEnvironmentVariable("ASPNETCORE_CONNECTIONSTRING_PAYMENTDEMO_DB"
+                    Environment.GetEnvironmentVariable(EnvironmentVariables.ConnectionString
                 )));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -42,8 +43,12 @@ namespace PaymentDemo
             services.AddScoped<IValidator, PaymentValidator>();
 
             services.AddScoped<IPaymentService, PaymentService>();
+
+            services.AddScoped<PaymentGatewayManager>();
+
             services.AddScoped<ICheapPaymentGateway, CheapPaymentGateway>();
             services.AddScoped<IExpensivePaymentGateway, ExpensivePaymentGateway>();
+            services.AddScoped<IPremiumPaymentGateway, PremiumPaymentGateway>();
 
             services.AddAutoMapper(typeof(DataContext).Assembly);
 

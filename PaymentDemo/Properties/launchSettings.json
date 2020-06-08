@@ -24,7 +24,10 @@
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_CONNECTIONSTRING_PAYMENTDEMO_DB": "Server=.; Database= PaymentsDb; Trusted_Connection=True;"
+        "ASPNETCORE_CONNECTIONSTRING_PAYMENTDEMO_DB": "Server=.; Database= PaymentsDb; Trusted_Connection=True;",
+        "ASPNETCORE_CHEAP_PROVIDER_ENDPOINT": "http://localhost:5001/api", 
+        "ASPNETCORE_EXPENSIVE_PROVIDER_ENDPOINT": "http://localhost:5002/api", 
+        "ASPNETCORE_PREMIUM_PROVIDER_ENDPOINT": "http://localhost:5003/api"
       }
     }
   }

@@ -6,20 +6,20 @@ using PaymentDemo.Services.Business.Interfaces;
 
 namespace PaymentDemo.Services.Business
 {
-    public class CheapPaymentGateway : ICheapPaymentGateway
+    public class PremiumPaymentGateway : IPremiumPaymentGateway
     {
         private readonly PaymentGatewayManager _paymentGatewayManager;
 
-        public CheapPaymentGateway(PaymentGatewayManager paymentGatewayManager)
+        public PremiumPaymentGateway(PaymentGatewayManager paymentGatewayManager)
         {
             _paymentGatewayManager = paymentGatewayManager;
         }
-
         public async Task<Result<Payment>> Process(Payment payment)
-        { 
-            payment.CheapProviderTries++;
+        {
+            payment.PremiumProviderTries++;
 
-            return await _paymentGatewayManager.Process(payment, EnvironmentVariables.CheapProviderEndpoint, "CheapProvider");
+            return await _paymentGatewayManager.Process(payment, EnvironmentVariables.PremiumProviderEndpoint,
+                "PremiumProvider");
         }
     }
 }

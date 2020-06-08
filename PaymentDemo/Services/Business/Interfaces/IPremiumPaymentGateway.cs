@@ -4,7 +4,7 @@ using PaymentDemo.Models;
 
 namespace PaymentDemo.Services.Business.Interfaces
 {
-    public interface IExpensivePaymentGateway
+    public interface IPremiumPaymentGateway
     {
         Task<Result<Payment>> Process(Payment payment);
     }

@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Newtonsoft.Json;
 using PaymentDemo.Entities;
-using PaymentDemo.Models;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -20,7 +19,7 @@ namespace PaymentDemo.Tests.Unit_Tests.PaymentService
 
         [Theory]
         [ClassData(typeof(PaymentServiceTestDataGenerator))]
-        public async void PaymentService_BusinessFlow(string label, Payment payment, int maxCheapProviderTries, int maxExpensiveProviderTries)
+        public async void PaymentService_BusinessFlow(string label, Payment payment, int maxCheapProviderTries, int maxExpensiveProviderTries, int maxPremiumProviderTries)
         {
             var result = await _fixture.PaymentService.Process(payment);
 
@@ -30,10 +29,12 @@ namespace PaymentDemo.Tests.Unit_Tests.PaymentService
             _output.WriteLine($@"
 {label}
 
-{JsonConvert.SerializeObject(payment)}
+{JsonConvert.SerializeObject(payment, Formatting.Indented)}
 
 Cheap Provider tries : {result.Value.CheapProviderTries} (max {maxCheapProviderTries})
-Expensive Provider tries: {result.Value.ExpensiveProviderTries} (max {maxExpensiveProviderTries})");
+Expensive Provider tries: {result.Value.ExpensiveProviderTries} (max {maxExpensiveProviderTries})
+Premium Provider tries: {result.Value.PremiumProviderTries} (max {maxPremiumProviderTries})
+");
         }
     }
 }

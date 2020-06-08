@@ -21,11 +21,12 @@ namespace PaymentDemo.Tests.Unit_Tests.PaymentService
                     Amount = 9.78m
                 },
                 1,
+                0,
                 0
             },
             new object[]
             {
-                "Medium Payment",
+                "Expensive Payment",
                 new Payment
                 {
                     CreditCardNumber = "4539683495058328",
@@ -35,11 +36,12 @@ namespace PaymentDemo.Tests.Unit_Tests.PaymentService
                     Amount = 29.78m
                 },
                 1,
-                1
+                1,
+                0
             },
             new object[]
             {
-                "Expensive Payment",
+                "Premium Payment",
                 new Payment
                 {
                     CreditCardNumber = "4539683495058328",
@@ -48,6 +50,7 @@ namespace PaymentDemo.Tests.Unit_Tests.PaymentService
                     SecurityCode = null,
                     Amount = 559.78m
                 },
+                0,
                 0,
                 3
             }
