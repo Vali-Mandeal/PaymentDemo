@@ -4,10 +4,11 @@
 How To:
 
 Run this project in Docker:
-- Go to Docker and run "Run.ps1" with PowerShell.
+- Go to ./Docker and run "Run.ps1" with PowerShell.
 - Done!
 
 Run this project in Visual Studio:
+- Open ./PaymentDemo.sln with VS
 - Packages will restore themselves automatically, wait until it's done.
 - Right click on the Solution and click "Set Startup Projects"
 - Click "Multiple startup projects" instead of single
